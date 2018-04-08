@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="InvoiceTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -57,6 +62,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
+    <Compile Include="TemplatePartials\CustomerTemplate.cs" />
     <Compile Include="TemplatePartials\InvoiceTemplatePartial.cs" />
     <Compile Include="TemplatePartials\SamplePartial.cs" />
     <Compile Include="TemplatePartials\TextTemplatePartial.cs" />
@@ -71,6 +77,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CustomerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CustomerTemplate.cs</LastGenOutput>
+    </Content>
     <Content Include="InvoiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>InvoiceTemplate.cs</LastGenOutput>

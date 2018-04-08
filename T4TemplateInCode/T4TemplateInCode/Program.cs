@@ -56,6 +56,20 @@ namespace T4TemplateInCode
             var invoiceToPrint = invoiceTemplate.TransformText();
             Console.WriteLine(invoiceToPrint);
 
+            // Customer
+            var customer = new Customer()
+            {
+                Name = "Rahman Mahmoodi",
+                Address = "27 Pitt Street Sydney 2000",
+                CustomerType = CustomerType.Vip,
+                Id = 1,
+                Phone = "99887766"
+            };
+
+            var customerTemplate = new CustomerTemplate(customer);
+            var customerToPrint = customerTemplate.TransformText();
+            Console.WriteLine(customerToPrint);
+
             Console.ReadLine();
 
         }
