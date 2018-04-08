@@ -1,0 +1,97 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Invoice</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Invoice</h1>
+			<address contenteditable>
+				<p><#= Invoice.Customer.Name #></p>
+				<p><#= Invoice.Customer.Address #></p>
+				<p><#= Invoice.Customer.Phone #></p>
+			</address>
+			<span><img alt="" src="http://www.jonathantneal.com/examples/invoice/logo.png"><input type="file" accept="image/*"></span>
+		</header>
+		<article>
+			<h1>Recipient</h1>
+			<address contenteditable>
+				<p>Some Company<br>c/o Some Guy</p>
+			</address>
+			<table class="meta">
+				<tr>
+					<th><span contenteditable>Invoice #</span></th>
+					<td><span contenteditable><#= Invoice.Number #></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Date</span></th>
+					<td><span contenteditable><#= Invoice.Date #></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Due</span></th>
+					<td><span id="prefix" contenteditable>$</span><span><#= Invoice.Total #></span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th><span contenteditable>Item</span></th>
+						<th><span contenteditable>Description</span></th>
+						<th><span contenteditable>Rate</span></th>
+						<th><span contenteditable>Quantity</span></th>
+						<th><span contenteditable>Price</span></th>
+					</tr>
+				</thead>
+				<tbody>
+
+				<# foreach (InvoiceLine line in Invoice.Lines)   
+				{ #>  
+
+					<tr>
+						<td><a class="cut">-</a><span contenteditable><#= line.Code #></span></td>
+						<td><span contenteditable><#= line.Description #></span></td>
+						<td><span data-prefix>$</span><span contenteditable><#= line.Amount #></span></td>
+						<td><span contenteditable><#= line.Quantity #></span></td>
+						<td><span data-prefix>$</span><span><#= line.Total #></span></td>
+					</tr>
+
+					<# } #>
+
+				</tbody>
+			</table>
+			<a class="add">+</a>
+			<table class="balance">
+				<tr>
+					<th><span contenteditable>Total</span></th>
+					<td><span data-prefix>$</span><span><#= Invoice.Total #></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Paid</span></th>
+					<td><span data-prefix>$</span><span contenteditable><#= Invoice.TotalPaid #></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Balance Due</span></th>
+					<td><span data-prefix>$</span><span><#= Invoice.Balance #></span></td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span contenteditable>Additional Notes</span></h1>
+			<div contenteditable>
+				<# if(Invoice.Customer.CustomerType == CustomerType.Vip){ #>
+					<p><#= Invoice.ExtraMessage #></p>
+				<# } #>
+			</div>
+		</aside>
+	</body>
+</html>
